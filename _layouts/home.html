@@ -1,0 +1,88 @@
+---
+layout: default
+---
+
+<!-- Page Header -->
+{% if page.background %}
+<header class="masthead" style="background:#00CFC3;">
+  {% else %}
+  <header class="masthead">
+    {% endif %}
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1><img class="img-fluid" src="/img/Matchmalo_logo.png"></h1>
+            <span class="subheading">All about how to grow your business at the lowest acquisition cost.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+
+        {{ content }}
+
+        <!-- Home Post List -->
+        <div class="row">
+  {% for post in site.posts %}
+  <div class="col-12 col-md-6">
+    <article class="post-preview">
+      <a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">
+        <div class="row">
+          <div class="col-12"><img class="img-fluid" alt="B2B brand collaboration" src="{{post.backgroundList}}"></div>
+          <div class="col-12"><h3 class="post-title mt-3">{{ post.title }}</h3></div>
+        </div>
+      </a>
+      {% if post.subtitle %}
+        <p class="my-3">{{ post.subtitle }}</p>
+        {% else %}
+        <p class="my-3">{{ post.excerpt | strip_html | truncatewords: 15 }}</p>
+        {% endif %}
+        <div class="row align-items-center">
+          <div class="col-3"><img class="rounded-circle img-author" src="/img/posts/Author/Ulrich Medenou.jpg"></div>
+          <div class="col">
+            <p class="post-meta my-2">
+              {% if post.author %}
+              {{ post.author }} <br>
+              {% else %}
+              {{ site.author }} <br>
+              {% endif %}
+              {{ post.date | date: '%B %d, %Y' }} &middot; {% include read_time.html content=post.content %}
+            </p>
+          </div>
+        </div>
+    </article>
+  </div>
+
+<!--<hr>-->
+
+  {% endfor %}
+</div>
+
+
+<!-- Pager -->
+{% if paginator.total_pages > 1 %}
+
+<div class="clearfix">
+
+  {% if paginator.previous_page %}
+  <a class="btn btn-primary float-left" href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr;
+    Newer<span class="d-none d-md-inline"> Posts</span></a>
+  {% endif %}
+
+  {% if paginator.next_page %}
+  <a class="btn btn-primary float-right" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older<span class="d-none d-md-inline"> Posts</span> &rarr;</a>
+  {% endif %}
+
+</div>
+
+{% endif %}
+
+      </div>
+    </div>
+  </div>
